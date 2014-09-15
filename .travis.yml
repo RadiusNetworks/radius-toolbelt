@@ -1,0 +1,14 @@
+language: ruby
+sudo: false
+bundler_args: --binstubs --standalone --without documentation debug
+script: bin/rspec
+rvm:
+  - 2.0
+  - 2.1
+  - ruby-head
+  - rbx-2
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+    - rvm: rbx-2
+  fast_finish: true

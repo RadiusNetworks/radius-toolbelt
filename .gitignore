@@ -1,0 +1,20 @@
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+*.so
+*.o
+*.a
+mkmf.log
+
+# Ignore bundler related files
+/.bundle/
+/bundle/
+*.bundle
+
+# Ignore development related binstubs
+/bin/

@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+#
+# Main CLI tool for working with common Radius Network tasks.
+#
+# USAGE: radius [OPTS]
+#
+# See `radius --help` for further details
