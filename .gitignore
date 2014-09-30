@@ -18,3 +18,4 @@ mkmf.log
 
 # Ignore development related binstubs
 /bin/
+/sbin/
