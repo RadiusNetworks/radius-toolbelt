@@ -2,6 +2,6 @@ require "radius/toolbelt/version"
 
 module Radius
   module Toolbelt
-    # Your code goes here...
+    autoload :CLI, 'radius/toolbelt/cli'
   end
 end

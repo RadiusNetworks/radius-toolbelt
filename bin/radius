@@ -5,3 +5,5 @@
 # USAGE: radius [OPTS]
 #
 # See `radius --help` for further details
+require 'radius/toolbelt'
+Radius::Toolbelt::CLI.run!
