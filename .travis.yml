@@ -3,12 +3,9 @@ sudo: false
 bundler_args: --binstubs sbin --standalone --without documentation debug
 script: sbin/rspec
 rvm:
-  - 2.0
   - 2.1
   - ruby-head
-  - rbx-2
 matrix:
   allow_failures:
     - rvm: ruby-head
-    - rvm: rbx-2
   fast_finish: true
