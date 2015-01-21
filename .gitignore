@@ -19,3 +19,6 @@ mkmf.log
 # Ignore development related binstubs
 /bin/
 /sbin/
+
+# Ignore sensitive environment files
+.radius-toolbelt-local

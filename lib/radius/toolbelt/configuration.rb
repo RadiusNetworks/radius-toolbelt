@@ -17,8 +17,9 @@ module Radius
       # contains the either key `:config` or `'config'` that file will be
       # used instead of any of the system files.
       #
-      # @param options [#to_hash, #to_h, #__hash__] manual options to set
+      # @param options [#to_hash, #to_h] manual options to set
       def initialize(options = nil)
+        @required_options = Array.new
         @manual_options = as_hash(options)
         @options = combine_options
       end
@@ -26,9 +27,25 @@ module Radius
       # @return [OpenStruct] the merged options; loaded from all sources
       attr_reader :options
 
+      # @param [Array, String, Symbol] List of options that should be set
+      def require_options(*opts)
+        self.required_options = opts.flatten.map(&:to_sym)
+      end
+
+      # @return [nil, Array<Symbol>]
+      #         Options that should be set but are not
+      def missing_options
+        missing = required_options - options.to_h.keys
+        missing.empty? ? nil : missing
+      end
+
       # @private
       attr_reader :manual_options
       private :manual_options
+
+      # @private
+      attr_accessor :required_options
+      private :required_options, :required_options=
 
     private
 
@@ -36,24 +53,11 @@ module Radius
         OpenStruct.new(file_options.merge(manual_options))
       end
 
-      # Commander's options are a faux-struct, faux-hash, faux-OpenStruct.
-      #
-      # It really wants to _be_ an OpenStruct, it's just an incomplete
-      # implementation.  It dates back to 2009 and does not follow many modern
-      # Ruby conventions.  More specifically, it does not implement
-      # `respond_to_missing`, does not properly delegate `method_missing` up
-      # the call chain, and refrains from implementing standard hash conversion
-      # methods such as `to_h` and `to_hash`.
-      #
-      # Instead of spending time fixing the Command gem we just implement out
-      # own wrapper to get a proper hash.
       def as_hash(options)
         if options.respond_to?(:to_hash)
           options.to_hash
         elsif options.respond_to?(:to_h)
           options.to_h
-        elsif options.respond_to?(:__hash__)    # Commander gem
-          options.__hash__
         else
           raise ArgumentError,
                 "Cannot convert options into hash: #{options.inspect}"

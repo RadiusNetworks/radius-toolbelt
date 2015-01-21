@@ -86,6 +86,43 @@ equivalents. To use these tasks add the following to your `Rakefile`:
 require 'radius/toolbelt/tasks'
 ```
 
+### Publish Github Release
+
+```console
+# From the PROJECT_ROOT directory
+$ radius release \
+    --org ORG
+    --repo REPO
+    --target BRANCH
+    --tag TAG_VERSION
+    --title RELEASE_TITLE
+    --no-release-notes
+    --[no-]pre
+    --binaries FILES...
+```
+
+Common settings can be saved in a project's `.radius-release` file:
+
+Settings
+
+- tag
+- title
+- description
+- binaries
+- pre-release
+
+```text
+--no-source
+--org RadiusNetworks
+--repo radius-toolbelt
+```
+
+This is also available as a Rake task:
+
+```console
+$ bin/rake radius:release
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/radius-toolbelt/fork )

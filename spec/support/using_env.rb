@@ -9,7 +9,7 @@ module Radius
         keys_to_delete = env_stubs.keys - ENV.keys
         original_values = env_stubs.each_with_object({}) { |(k, v), env|
           env[k] = ENV[k] if ENV.has_key?(k)
-          ENV[k] = v
+          ENV[k] = v.to_s
         }
         lifetime.call
       ensure

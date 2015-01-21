@@ -3,9 +3,20 @@ require 'support/string'
 require 'support/using_env'
 require 'support/using_temp'
 
+require 'pry'
 module Radius
   module Toolbelt
     ::RSpec.describe Configuration do
+
+      # We need to clear out any user level configs so they don't mess with
+      # the expected values of the specs.
+      around(:example) do |example|
+        in_tmpdir do |project_dir|
+          using_env('HOME' => project_dir) do
+            example.call
+          end
+        end
+      end
 
       it 'uses the provided options' do
         config = {
@@ -29,6 +40,22 @@ module Radius
           a_string: 1234,
           doctor: 'who? riiiight',
         )
+      end
+
+      context 'with required options' do
+        describe 'asking which options are missing' do
+          it 'returns nil when all options are required' do
+            all_options_set = Configuration.new(tor: true, repo: 'dr-ock')
+            all_options_set.require_options :tor, :repo
+            expect(all_options_set.missing_options).to be nil
+          end
+
+          it 'returns the list of options which are not set' do
+            no_options_set = Configuration.new
+            no_options_set.require_options :tor, :repo
+            expect(no_options_set.missing_options).to match_array [:tor, :repo]
+          end
+        end
       end
 
       context 'with system files' do
@@ -82,7 +109,7 @@ module Radius
         end
       end
 
-      it 'it warns when a HOME directory cannot be found' do
+      it 'warns when a HOME directory cannot be found' do
         using_env('HOME' => nil) do
           expect { Configuration.new }.to output(
             "Unable to find ~/.radius-toolbelt because the HOME environment variable is not set\n"
