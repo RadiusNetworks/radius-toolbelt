@@ -25,58 +25,6 @@ $ cd radius-toolbelt
 $ rake install
 ```
 
-## Usage
-
-This toolbelt provides a suite of commands. You can see the list of available
-commands by running `radius`:
-
-```console
-$ radius
-  NAME:
-
-    radius
-
-  DESCRIPTION:
-
-    Main CLI tool for working with common Radius Network tasks.
-
-  COMMANDS:
-
-    help                 Display global or [command] help documentation
-
-  GLOBAL OPTIONS:
-
-    -c, --config FILE
-        Specify the options file
-
-    -h, --help
-        Display help documentation
-
-    -v, --version
-        Display version information
-
-    -t, --trace
-        Display backtrace when an error occurs
-
-  COPYRIGHT:
-
-    2014 Radius Networks
-```
-
-If you need help with a specific command simply pass it the `--help` flag:
-
-```console
-$ radius COMMAND --help
-```
-
-### Config Files
-
-Configuration options are loaded from `~/.radius-toolbelt`, `.radius-toolbelt`,
-`.radius-toolbelt-local`, and the command line switches (listed in lowest to
-highest precedence). For example, an option in `~/.radius-toolbelt` can be
-overridden by an option in `.radius-toolbelt`, which can be overwritten by the
-provided command line flag.
-
 ### Rake
 
 Some of these tools come with handy [Rake](https://github.com/jimweirich/rake)

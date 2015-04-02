@@ -1,4 +1,4 @@
-Copyright (c) 2014 Aaron Kromer
+Copyright (c) 2015 Radius Networks
 
 MIT License
 
