@@ -33,7 +33,7 @@ namespace :version do
     sh "agvtool next-version -increment-minor-version"
   end
 
-  desc "Set the version via `rake version:set version=\"1.0.0\""
+  desc "Set the version to a specific version number"
   task :set, [:version] do |t, args|
     v = args[:version]
     fail "Error: no version specified" unless v
