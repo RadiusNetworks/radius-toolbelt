@@ -4,6 +4,12 @@ module Radius
   module Toolbelt
     module ReleaseHelpers
 
+      def tag_version(ver)
+        unless system("git tag v#{agvtool_version}")
+          fail "Error: the tag v#{agvtool_version} already exists on this repo."
+        end
+      end
+
       def replace(src, dest)
         FileUtils.copy_entry(src, dest, false, false, true)
       end
