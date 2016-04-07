@@ -25,7 +25,19 @@ module Radius
 
       def release_github(repo, release_name, version, files)
         tag_name = "v#{version}"
-        body = "TODO: Describe the changes in this release"
+        body = <<EOF
+Bug Fixes:
+
+ - TODO: Describe any bug fixes
+
+Enhancements:
+
+ - TODO: Describe any new features or enhancements
+
+Deprecations:
+
+ - TODO: Describe any eprecations
+EOF
         token = github_token
 
         r = ReleaseGithub.new repo, token, tag_name, release_name, body, files
