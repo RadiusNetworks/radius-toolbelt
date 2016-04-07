@@ -36,7 +36,7 @@ Enhancements:
 
 Deprecations:
 
- - TODO: Describe any eprecations
+ - TODO: Describe any deprecations
 EOF
         token = github_token
 
