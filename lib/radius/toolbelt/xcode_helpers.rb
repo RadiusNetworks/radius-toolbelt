@@ -15,7 +15,7 @@ module Radius
       end
 
       def xcode(action, params)
-        system "xcodebuild #{params.map {|k,v| "-#{k} #{v}"}.join ' '} #{action} | xcpretty"
+        system "xcodebuild #{params.map {|k,v| "-#{k} #{v}"}.join ' '} #{action}"
       end
 
       def agvtool_version
