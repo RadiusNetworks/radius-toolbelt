@@ -5,8 +5,8 @@ module Radius
     module ReleaseHelpers
 
       def tag_version(ver)
-        unless system("git tag v#{agvtool_version}")
-          fail "Error: the tag v#{agvtool_version} already exists on this repo."
+        unless system("git tag v#{ver}")
+          fail "Error: the tag v#{ver} already exists on this repo."
         end
       end
 
