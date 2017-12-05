@@ -5,7 +5,6 @@ require 'launchy'
 
 module Radius
   module Toolbelt
-
     class ReleaseGithub
 
       attr_reader :repo, :tag_name, :release_name, :body, :filenames, :token
@@ -19,8 +18,6 @@ module Radius
       end
 
       def run
-        # pull token from ENV or hub config
-
         puts "\nCreating draft release \"#{release_name}\" for repo \"#{repo}\"..."
         # create the release
         client = Octokit::Client.new(access_token: token)
@@ -39,11 +36,11 @@ module Radius
         end
 
         puts "\nRelease URL: #{release.html_url}"
-        Launchy.open( release.html_url.gsub("/tag/", "/edit/") )
+        edit_url = release.html_url.gsub("/tag/", "/edit/")
+        if block_given?
+          yield({edit_url: edit_url})
+        end
       end
-
     end
-
-
   end
 end

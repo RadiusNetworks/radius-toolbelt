@@ -1,6 +1,7 @@
 # Main hook for loading various Rake tasks
 require 'rake'
 require_relative 'release_helpers'
+require_relative 'slack_helpers'
 require_relative 'xcode_helpers'
 require_relative 'release_repo'
 require_relative 'release_github'
@@ -27,17 +28,3 @@ namespace :git do
   end
 end
 
-namespace :version do
-  desc "Bump the version to the next patch number"
-  task :bump do
-    sh "agvtool next-version -increment-minor-version"
-  end
-
-  desc "Set the version to a specific version number"
-  task :set, [:version] do |t, args|
-    v = args[:version]
-    fail "Error: no version specified" unless v
-
-    sh "xcrun agvtool new-version #{v}"
-  end
-end

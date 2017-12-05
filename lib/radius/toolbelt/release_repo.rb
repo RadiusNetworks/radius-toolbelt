@@ -45,8 +45,8 @@ module Radius
         FileUtils.chdir dir do
           sh "git add ."
           sh "git commit -m 'Version #{ver}'"
-          sh "git tag v#{ver}"
-          sh "git push origin master --tags"
+          sh "git tag --force v#{ver}"
+          sh "git push --force origin v#{ver}"
         end
       end
     end
